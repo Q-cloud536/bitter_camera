@@ -1,0 +1,49 @@
+group 'com.bittercamera.media_processing_kit'
+version '0.0.1'
+
+buildscript {
+    ext.kotlin_version = '1.9.24'
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:8.3.2"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    namespace 'com.bittercamera.media_processing_kit'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 24  // ML Kit face detection requires API 24+
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // Google ML Kit Face Detection (bundled model, works offline)
+    implementation "com.google.mlkit:face-detection:16.1.7"
+
+    // OpenCV Android SDK for image processing
+    implementation "org.opencv:opencv:4.10.0"
+}
+
